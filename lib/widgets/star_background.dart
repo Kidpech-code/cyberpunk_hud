@@ -16,12 +16,16 @@ class StarBackground extends StatefulWidget {
 /// Holds no mutable UI state — all mutations live in [_StarNotifier].
 /// The widget tree never rebuilds on each animation frame; only the canvas
 /// repaints via [CustomPaint.repaint].
-class _StarBackgroundState extends State<StarBackground> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+class _StarBackgroundState extends State<StarBackground>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late final _StarNotifier _notifier;
   late final Ticker _ticker;
   Duration _lastTick = Duration.zero;
 
-  Duration get _frameInterval => widget.powerSaveEnabled ? const Duration(milliseconds: 28) : const Duration(milliseconds: 16);
+  Duration get _frameInterval =>
+      widget.powerSaveEnabled
+          ? const Duration(milliseconds: 28)
+          : const Duration(milliseconds: 16);
 
   @override
   void initState() {
@@ -65,7 +69,10 @@ class _StarBackgroundState extends State<StarBackground> with SingleTickerProvid
 
     _lastTick = elapsed;
     final speedScale = dt.inMicroseconds / 16667.0; // normalize around 60fps
-    _notifier.tick(speedScale: speedScale, powerSaveEnabled: widget.powerSaveEnabled);
+    _notifier.tick(
+      speedScale: speedScale,
+      powerSaveEnabled: widget.powerSaveEnabled,
+    );
   }
 
   @override
@@ -85,7 +92,10 @@ class _StarBackgroundState extends State<StarBackground> with SingleTickerProvid
       child: LayoutBuilder(
         builder: (context, constraints) {
           final size = Size(constraints.maxWidth, constraints.maxHeight);
-          _notifier.ensureInitialized(size, powerSaveEnabled: widget.powerSaveEnabled);
+          _notifier.ensureInitialized(
+            size,
+            powerSaveEnabled: widget.powerSaveEnabled,
+          );
           // repaint: _notifier — Flutter repaints only the canvas leaf when
           // the notifier fires, never the widget tree above it.
           return CustomPaint(painter: _StarPainter(_notifier), size: size);
@@ -128,7 +138,10 @@ class _StarNotifier extends ChangeNotifier {
   void reconfigure({required bool powerSaveEnabled}) {
     if (_size == Size.zero) return;
 
-    final targetCount = _starCountFor(_size, powerSaveEnabled: powerSaveEnabled);
+    final targetCount = _starCountFor(
+      _size,
+      powerSaveEnabled: powerSaveEnabled,
+    );
     final currentCount = _stars.length;
     if (currentCount < targetCount) {
       for (int i = currentCount; i < targetCount; i++) {
@@ -141,9 +154,11 @@ class _StarNotifier extends ChangeNotifier {
   }
 
   int _starCountFor(Size size, {required bool powerSaveEnabled}) {
-    if (size.width == 0 || size.height == 0) return powerSaveEnabled ? _kMinCountSave : _kMinCountFull;
+    if (size.width == 0 || size.height == 0)
+      return powerSaveEnabled ? _kMinCountSave : _kMinCountFull;
     final area = size.width * size.height;
-    final scaled = powerSaveEnabled ? (area / 4200).round() : (area / 3200).round();
+    final scaled =
+        powerSaveEnabled ? (area / 4200).round() : (area / 3200).round();
     final minCount = powerSaveEnabled ? _kMinCountSave : _kMinCountFull;
     final maxCount = powerSaveEnabled ? _kMaxCountSave : _kMaxCountFull;
     return scaled.clamp(minCount, maxCount);
@@ -176,8 +191,11 @@ class _Star {
   double x, y, z;
   _Star(this.x, this.y, this.z);
 
-  factory _Star.random(Random rng, Size s) =>
-      _Star(rng.nextDouble() * s.width - s.width / 2, rng.nextDouble() * s.height - s.height / 2, rng.nextDouble() * s.width);
+  factory _Star.random(Random rng, Size s) => _Star(
+    rng.nextDouble() * s.width - s.width / 2,
+    rng.nextDouble() * s.height - s.height / 2,
+    rng.nextDouble() * s.width,
+  );
 }
 
 // ─── Painter ──────────────────────────────────────────────────────────────────

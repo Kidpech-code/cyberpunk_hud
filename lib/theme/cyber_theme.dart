@@ -16,7 +16,12 @@ const kPrimaryGlow = Color(0x1A00F3FF); // rgba(0,243,255,0.10)
 const kCardBg = Color(0x990A141E); // rgba(10,20,30,0.60)
 
 // ─── Text Styles ───────────────────────────────────────────────────────────
-TextStyle orbitron(double size, {FontWeight weight = FontWeight.w900, Color color = kPrimary, double letterSpacing = 2}) => GoogleFonts.orbitron(
+TextStyle orbitron(
+  double size, {
+  FontWeight weight = FontWeight.w900,
+  Color color = kPrimary,
+  double letterSpacing = 2,
+}) => GoogleFonts.orbitron(
   fontSize: size,
   fontWeight: weight,
   color: color,
@@ -24,14 +29,28 @@ TextStyle orbitron(double size, {FontWeight weight = FontWeight.w900, Color colo
   shadows: [Shadow(color: color.withValues(alpha: 0.8), blurRadius: 20)],
 );
 
-TextStyle shareTech(double size, {Color color = kPrimary, double letterSpacing = 1}) =>
-    GoogleFonts.shareTechMono(fontSize: size, color: color, letterSpacing: letterSpacing);
+TextStyle shareTech(
+  double size, {
+  Color color = kPrimary,
+  double letterSpacing = 1,
+}) => GoogleFonts.shareTechMono(
+  fontSize: size,
+  color: color,
+  letterSpacing: letterSpacing,
+);
 
 // ─── MaterialApp Theme ─────────────────────────────────────────────────────
 ThemeData cyberTheme() {
   return ThemeData.dark().copyWith(
     scaffoldBackgroundColor: kBg,
-    colorScheme: const ColorScheme.dark(primary: kPrimary, secondary: kSecondary, error: kAlert, surface: kBg),
-    textTheme: GoogleFonts.shareTechMonoTextTheme(ThemeData.dark().textTheme).apply(bodyColor: kPrimary, displayColor: kPrimary),
+    colorScheme: const ColorScheme.dark(
+      primary: kPrimary,
+      secondary: kSecondary,
+      error: kAlert,
+      surface: kBg,
+    ),
+    textTheme: GoogleFonts.shareTechMonoTextTheme(
+      ThemeData.dark().textTheme,
+    ).apply(bodyColor: kPrimary, displayColor: kPrimary),
   );
 }

@@ -48,4 +48,6 @@ class PerformanceNotifier extends Notifier<bool> {
   }
 }
 
-final performanceProvider = NotifierProvider<PerformanceNotifier, bool>(PerformanceNotifier.new);
+final performanceProvider = NotifierProvider<PerformanceNotifier, bool>(
+  PerformanceNotifier.new,
+);

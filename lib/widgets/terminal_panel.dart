@@ -30,7 +30,12 @@ class TerminalPanel extends StatefulWidget {
   final double height;
   final VoidCallback? onComplete;
 
-  const TerminalPanel({super.key, required this.logs, this.height = 220, this.onComplete});
+  const TerminalPanel({
+    super.key,
+    required this.logs,
+    this.height = 220,
+    this.onComplete,
+  });
 
   @override
   State<TerminalPanel> createState() => _TerminalPanelState();
@@ -65,7 +70,11 @@ class _TerminalPanelState extends State<TerminalPanel> {
       });
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (_scroll.hasClients) {
-          _scroll.animateTo(_scroll.position.maxScrollExtent, duration: const Duration(milliseconds: 150), curve: Curves.easeOut);
+          _scroll.animateTo(
+            _scroll.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 150),
+            curve: Curves.easeOut,
+          );
         }
       });
       _scheduleNext();
@@ -99,10 +108,19 @@ class _TerminalPanelState extends State<TerminalPanel> {
         itemBuilder: (_, i) {
           if (i == _visible.length) {
             // blinking cursor
-            return Text('> ${_blinkOn ? '_' : ' '}', style: shareTech(13, color: kPrimary.withValues(alpha: 0.6)));
+            return Text(
+              '> ${_blinkOn ? '_' : ' '}',
+              style: shareTech(13, color: kPrimary.withValues(alpha: 0.6)),
+            );
           }
           final line = _visible[i];
-          return _FadeInLine(key: ValueKey(i), child: Text('> ${line.message}', style: shareTech(13, color: _logColor(line.type))));
+          return _FadeInLine(
+            key: ValueKey(i),
+            child: Text(
+              '> ${line.message}',
+              style: shareTech(13, color: _logColor(line.type)),
+            ),
+          );
         },
       ),
     );
@@ -123,14 +141,18 @@ class _FadeInLine extends StatefulWidget {
   State<_FadeInLine> createState() => _FadeInLineState();
 }
 
-class _FadeInLineState extends State<_FadeInLine> with SingleTickerProviderStateMixin {
+class _FadeInLineState extends State<_FadeInLine>
+    with SingleTickerProviderStateMixin {
   late AnimationController _c;
   late Animation<double> _a;
 
   @override
   void initState() {
     super.initState();
-    _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
+    _c = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
     _a = CurvedAnimation(parent: _c, curve: Curves.easeIn);
     _c.forward();
   }
@@ -142,5 +164,6 @@ class _FadeInLineState extends State<_FadeInLine> with SingleTickerProviderState
   }
 
   @override
-  Widget build(BuildContext context) => FadeTransition(opacity: _a, child: widget.child);
+  Widget build(BuildContext context) =>
+      FadeTransition(opacity: _a, child: widget.child);
 }

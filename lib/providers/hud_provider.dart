@@ -4,20 +4,31 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Immutable state model for the main HUD screen.
 class HudState {
-  const HudState({this.showButton = true, this.showTerminal = false, this.complete = false});
+  const HudState({
+    this.showButton = true,
+    this.showTerminal = false,
+    this.complete = false,
+  });
 
   final bool showButton;
   final bool showTerminal;
   final bool complete;
 
   HudState copyWith({bool? showButton, bool? showTerminal, bool? complete}) {
-    return HudState(showButton: showButton ?? this.showButton, showTerminal: showTerminal ?? this.showTerminal, complete: complete ?? this.complete);
+    return HudState(
+      showButton: showButton ?? this.showButton,
+      showTerminal: showTerminal ?? this.showTerminal,
+      complete: complete ?? this.complete,
+    );
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is HudState && showButton == other.showButton && showTerminal == other.showTerminal && complete == other.complete;
+      other is HudState &&
+          showButton == other.showButton &&
+          showTerminal == other.showTerminal &&
+          complete == other.complete;
 
   @override
   int get hashCode => Object.hash(showButton, showTerminal, complete);

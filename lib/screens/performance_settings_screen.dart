@@ -32,10 +32,19 @@ class PerformanceSettingsScreen extends ConsumerWidget {
                     children: [
                       IconButton(
                         onPressed: () => Navigator.of(context).maybePop(),
-                        icon: const Icon(Icons.arrow_back_ios_new_rounded, color: kPrimary),
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          color: kPrimary,
+                        ),
                       ),
                       const SizedBox(width: 8),
-                      Expanded(child: Text('Performance', textAlign: TextAlign.center, style: orbitron(20, letterSpacing: 2.5))),
+                      Expanded(
+                        child: Text(
+                          'Performance',
+                          textAlign: TextAlign.center,
+                          style: orbitron(20, letterSpacing: 2.5),
+                        ),
+                      ),
                       const SizedBox(width: 48),
                     ],
                   ),
@@ -44,19 +53,32 @@ class PerformanceSettingsScreen extends ConsumerWidget {
                     width: width < 560 ? width - 40 : 520,
                     child: CyberCard(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
                         child: SwitchListTile(
                           value: powerSaveEnabled,
                           activeThumbColor: kSuccess,
                           activeTrackColor: kSuccess.withValues(alpha: 0.35),
                           inactiveThumbColor: kPrimary,
                           inactiveTrackColor: kPrimary.withValues(alpha: 0.25),
-                          title: Text('Power Save', style: shareTech(16, color: kPrimary, letterSpacing: 1.2)),
+                          title: Text(
+                            'Power Save',
+                            style: shareTech(
+                              16,
+                              color: kPrimary,
+                              letterSpacing: 1.2,
+                            ),
+                          ),
                           subtitle: Text(
                             powerSaveEnabled
                                 ? 'Battery optimized: lower animation workload and frame cadence.'
                                 : 'Maximum visual performance: higher animation workload and cadence.',
-                            style: shareTech(12, color: kPrimary.withValues(alpha: 0.75)),
+                            style: shareTech(
+                              12,
+                              color: kPrimary.withValues(alpha: 0.75),
+                            ),
                           ),
                           onChanged: (value) {
                             notifier.setEnabled(value);

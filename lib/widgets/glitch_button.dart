@@ -8,13 +8,20 @@ class GlitchButton extends StatefulWidget {
   final Color color;
   final double height;
 
-  const GlitchButton({super.key, required this.label, this.onPressed, this.color = kPrimary, this.height = 56});
+  const GlitchButton({
+    super.key,
+    required this.label,
+    this.onPressed,
+    this.color = kPrimary,
+    this.height = 56,
+  });
 
   @override
   State<GlitchButton> createState() => _GlitchButtonState();
 }
 
-class _GlitchButtonState extends State<GlitchButton> with SingleTickerProviderStateMixin {
+class _GlitchButtonState extends State<GlitchButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _ctrl;
   late Animation<double> _fill;
   bool _hovering = false;
@@ -22,7 +29,10 @@ class _GlitchButtonState extends State<GlitchButton> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 350));
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 350),
+    );
     _fill = CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut);
   }
 
@@ -56,16 +66,37 @@ class _GlitchButtonState extends State<GlitchButton> with SingleTickerProviderSt
               height: widget.height,
               decoration: BoxDecoration(
                 border: Border.all(color: widget.color, width: 2),
-                boxShadow: _hovering ? [BoxShadow(color: widget.color.withValues(alpha: 0.5), blurRadius: 24)] : [],
+                boxShadow:
+                    _hovering
+                        ? [
+                          BoxShadow(
+                            color: widget.color.withValues(alpha: 0.5),
+                            blurRadius: 24,
+                          ),
+                        ]
+                        : [],
               ),
               child: Stack(
                 children: [
                   // Fill layer (slides from left)
                   Positioned.fill(
-                    child: FractionallySizedBox(alignment: Alignment.centerLeft, widthFactor: _fill.value, child: Container(color: widget.color)),
+                    child: FractionallySizedBox(
+                      alignment: Alignment.centerLeft,
+                      widthFactor: _fill.value,
+                      child: Container(color: widget.color),
+                    ),
                   ),
                   // Label
-                  Center(child: Text(widget.label, style: orbitron(14, color: _hovering ? Colors.black : widget.color, letterSpacing: 3))),
+                  Center(
+                    child: Text(
+                      widget.label,
+                      style: orbitron(
+                        14,
+                        color: _hovering ? Colors.black : widget.color,
+                        letterSpacing: 3,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             );

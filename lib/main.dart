@@ -24,7 +24,10 @@ class CyberpunkApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: cyberTheme(),
       initialRoute: AppRoutes.home,
-      routes: {AppRoutes.home: (_) => const HomeScreen(), AppRoutes.performanceSettings: (_) => const PerformanceSettingsScreen()},
+      routes: {
+        AppRoutes.home: (_) => const HomeScreen(),
+        AppRoutes.performanceSettings: (_) => const PerformanceSettingsScreen(),
+      },
     );
   }
 }

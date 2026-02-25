@@ -32,7 +32,9 @@ class CyberCard extends StatelessWidget {
             child: Container(
               height: 1.5,
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [kPrimary, kPrimary.withValues(alpha: 0.4)]),
+                gradient: LinearGradient(
+                  colors: [kPrimary, kPrimary.withValues(alpha: 0.4)],
+                ),
                 boxShadow: [BoxShadow(color: kPrimary, blurRadius: 10)],
               ),
             ),
@@ -46,7 +48,9 @@ class CyberCard extends StatelessWidget {
             child: Container(
               height: 1.5,
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [kPrimary.withValues(alpha: 0.4), kPrimary]),
+                gradient: LinearGradient(
+                  colors: [kPrimary.withValues(alpha: 0.4), kPrimary],
+                ),
                 boxShadow: [BoxShadow(color: kPrimary, blurRadius: 10)],
               ),
             ),

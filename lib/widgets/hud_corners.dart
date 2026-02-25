@@ -8,7 +8,13 @@ class HudCorners extends StatelessWidget {
   final double strokeWidth;
   final double radius;
 
-  const HudCorners({super.key, this.size = 120, this.margin = 20, this.strokeWidth = 2, this.radius = 14});
+  const HudCorners({
+    super.key,
+    this.size = 120,
+    this.margin = 20,
+    this.strokeWidth = 2,
+    this.radius = 14,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +23,53 @@ class HudCorners extends StatelessWidget {
         child: Stack(
           children: [
             // Top-left
-            Positioned(top: margin, left: margin, child: _Corner(size: size, strokeWidth: strokeWidth, radius: radius, top: true, left: true)),
+            Positioned(
+              top: margin,
+              left: margin,
+              child: _Corner(
+                size: size,
+                strokeWidth: strokeWidth,
+                radius: radius,
+                top: true,
+                left: true,
+              ),
+            ),
             // Top-right
-            Positioned(top: margin, right: margin, child: _Corner(size: size, strokeWidth: strokeWidth, radius: radius, top: true, left: false)),
+            Positioned(
+              top: margin,
+              right: margin,
+              child: _Corner(
+                size: size,
+                strokeWidth: strokeWidth,
+                radius: radius,
+                top: true,
+                left: false,
+              ),
+            ),
             // Bottom-left
-            Positioned(bottom: margin, left: margin, child: _Corner(size: size, strokeWidth: strokeWidth, radius: radius, top: false, left: true)),
+            Positioned(
+              bottom: margin,
+              left: margin,
+              child: _Corner(
+                size: size,
+                strokeWidth: strokeWidth,
+                radius: radius,
+                top: false,
+                left: true,
+              ),
+            ),
             // Bottom-right
-            Positioned(bottom: margin, right: margin, child: _Corner(size: size, strokeWidth: strokeWidth, radius: radius, top: false, left: false)),
+            Positioned(
+              bottom: margin,
+              right: margin,
+              child: _Corner(
+                size: size,
+                strokeWidth: strokeWidth,
+                radius: radius,
+                top: false,
+                left: false,
+              ),
+            ),
           ],
         ),
       ),
@@ -38,7 +84,13 @@ class _Corner extends StatelessWidget {
   final bool top;
   final bool left;
 
-  const _Corner({required this.size, required this.strokeWidth, required this.radius, required this.top, required this.left});
+  const _Corner({
+    required this.size,
+    required this.strokeWidth,
+    required this.radius,
+    required this.top,
+    required this.left,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +99,14 @@ class _Corner extends StatelessWidget {
       child: SizedBox(
         width: size,
         height: size,
-        child: CustomPaint(painter: _CornerPainter(strokeWidth: strokeWidth, radius: radius, top: top, left: left)),
+        child: CustomPaint(
+          painter: _CornerPainter(
+            strokeWidth: strokeWidth,
+            radius: radius,
+            top: top,
+            left: left,
+          ),
+        ),
       ),
     );
   }
@@ -59,7 +118,12 @@ class _CornerPainter extends CustomPainter {
   final bool top;
   final bool left;
 
-  _CornerPainter({required this.strokeWidth, required this.radius, required this.top, required this.left});
+  _CornerPainter({
+    required this.strokeWidth,
+    required this.radius,
+    required this.top,
+    required this.left,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -94,20 +158,32 @@ class _CornerPainter extends CustomPainter {
       // ┌ corner: draw top edge and left edge
       path.moveTo(w, 0);
       path.lineTo(r, 0);
-      path.arcToPoint(Offset(0, r), radius: Radius.circular(r), clockwise: false);
+      path.arcToPoint(
+        Offset(0, r),
+        radius: Radius.circular(r),
+        clockwise: false,
+      );
       path.lineTo(0, h);
     } else if (top && !left) {
       // ┐ corner
       path.moveTo(0, 0);
       path.lineTo(w - r, 0);
-      path.arcToPoint(Offset(w, r), radius: Radius.circular(r), clockwise: true);
+      path.arcToPoint(
+        Offset(w, r),
+        radius: Radius.circular(r),
+        clockwise: true,
+      );
       path.lineTo(w, h);
     } else if (!top && left) {
       // └ corner
       path.moveTo(w, h);
       path.lineTo(0, h - r + 0);
       path.lineTo(0, h - r);
-      path.arcToPoint(Offset(r, h), radius: Radius.circular(r), clockwise: false);
+      path.arcToPoint(
+        Offset(r, h),
+        radius: Radius.circular(r),
+        clockwise: false,
+      );
       path.moveTo(0, h - r);
       // redraw cleanly
       final p2 = Path();
@@ -137,23 +213,39 @@ class _CornerPainter extends CustomPainter {
     if (top && left) {
       path.moveTo(w, 0);
       path.lineTo(r, 0);
-      path.arcToPoint(Offset(0, r), radius: Radius.circular(r), clockwise: false);
+      path.arcToPoint(
+        Offset(0, r),
+        radius: Radius.circular(r),
+        clockwise: false,
+      );
       path.lineTo(0, h);
     } else if (top && !left) {
       path.moveTo(0, 0);
       path.lineTo(w - r, 0);
-      path.arcToPoint(Offset(w, r), radius: Radius.circular(r), clockwise: true);
+      path.arcToPoint(
+        Offset(w, r),
+        radius: Radius.circular(r),
+        clockwise: true,
+      );
       path.lineTo(w, h);
     } else if (!top && left) {
       path.moveTo(w, h);
       path.lineTo(r, h);
-      path.arcToPoint(Offset(0, h - r), radius: Radius.circular(r), clockwise: false);
+      path.arcToPoint(
+        Offset(0, h - r),
+        radius: Radius.circular(r),
+        clockwise: false,
+      );
       path.lineTo(0, 0);
     } else {
       // bottom-right
       path.moveTo(0, h);
       path.lineTo(w - r, h);
-      path.arcToPoint(Offset(w, h - r), radius: Radius.circular(r), clockwise: true);
+      path.arcToPoint(
+        Offset(w, h - r),
+        radius: Radius.circular(r),
+        clockwise: true,
+      );
       path.lineTo(w, 0);
     }
     return path;

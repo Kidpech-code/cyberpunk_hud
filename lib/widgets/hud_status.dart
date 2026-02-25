@@ -36,7 +36,10 @@ class _BlinkTextState extends State<BlinkText> {
     // Opacity(1.0) is a Flutter no-op — zero compositor overhead.
     // Opacity(0.0) skips painting entirely without creating an anim layer.
     opacity: _visible ? 1.0 : 0.0,
-    child: Text(widget.text, style: widget.style ?? shareTech(12, color: kPrimary)),
+    child: Text(
+      widget.text,
+      style: widget.style ?? shareTech(12, color: kPrimary),
+    ),
   );
 }
 
@@ -52,7 +55,12 @@ class HudStatusBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Flexible(child: BlinkText(top ? '● SYSTEM ONLINE' : '● SECURE CONNECTION', style: shareTech(11, color: kSuccess))),
+          Flexible(
+            child: BlinkText(
+              top ? '● SYSTEM ONLINE' : '● SECURE CONNECTION',
+              style: shareTech(11, color: kSuccess),
+            ),
+          ),
           Flexible(
             child: Text(
               top ? 'PROTOCOL: OAUTH2' : 'ENCRYPTION: AES-256',

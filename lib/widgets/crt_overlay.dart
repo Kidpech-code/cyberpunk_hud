@@ -9,7 +9,9 @@ class CrtOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IgnorePointer(child: SizedBox.expand(child: CustomPaint(painter: _CrtPainter())));
+    return IgnorePointer(
+      child: SizedBox.expand(child: CustomPaint(painter: _CrtPainter())),
+    );
   }
 }
 
@@ -31,7 +33,12 @@ class _CrtPainter extends CustomPainter {
         ..shader = ui.Gradient.linear(
           Offset.zero,
           const Offset(0, 2), // 2-pixel vertical period
-          const [Color(0x00000000), Color(0x00000000), Color(0x18000000), Color(0x18000000)],
+          const [
+            Color(0x00000000),
+            Color(0x00000000),
+            Color(0x18000000),
+            Color(0x18000000),
+          ],
           [0.0, 0.5, 0.5, 1.0],
           TileMode.repeated,
         ),
@@ -47,7 +54,12 @@ class _CrtPainter extends CustomPainter {
         ..shader = ui.Gradient.linear(
           Offset.zero,
           const Offset(3, 0), // 3-pixel horizontal period
-          const [Color(0x10FF0000), Color(0x0500FF00), Color(0x100000FF), Color(0x10FF0000)],
+          const [
+            Color(0x10FF0000),
+            Color(0x0500FF00),
+            Color(0x100000FF),
+            Color(0x10FF0000),
+          ],
           [0.0, 0.333, 0.666, 1.0],
           TileMode.repeated,
         ),
@@ -56,7 +68,16 @@ class _CrtPainter extends CustomPainter {
     // ── Vignette ──────────────────────────────────────────────────────────
     final center = Offset(size.width / 2, size.height / 2);
     final radius = size.longestSide * 0.75;
-    canvas.drawRect(rect, Paint()..shader = ui.Gradient.radial(center, radius, [const Color(0x00000000), const Color(0x26000000)], [0.75, 1.0]));
+    canvas.drawRect(
+      rect,
+      Paint()
+        ..shader = ui.Gradient.radial(
+          center,
+          radius,
+          [const Color(0x00000000), const Color(0x26000000)],
+          [0.75, 1.0],
+        ),
+    );
   }
 
   @override
